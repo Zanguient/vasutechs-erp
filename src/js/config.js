@@ -127,20 +127,20 @@ erpApp.constant('erpAppConfig', {
             icon: 'stack-exchange',
             partMaster: {
                 title: 'Part Master',
-                data: {
-                    partNo: '',
-                    partName: '',
-                    rawMaterial: '',
-                    inputWeight: '',
-                    finishedWeight: '',
-                    finishedWeight: '',
-                    hsnCode: '',
-                    uom: '',
-                    prodRateHr: '',
-                    rate: '',
-                    gst: '',
-                    sgst: '',
-                    cgst: ''
+                masterData: {
+                    partNo: null,
+                    partName: null,
+                    rawMaterial: null,
+                    inputWeight: null,
+                    finishedWeight: null,
+                    finishedWeight: null,
+                    hsnCode: null,
+                    uom: null,
+                    prodRateHr: null,
+                    rate: null,
+                    gst: null,
+                    sgst: null,
+                    cgst: null
                 },
                 form: {
                     name: 'partMaster',
@@ -161,7 +161,9 @@ erpApp.constant('erpAppConfig', {
                         name: 'Raw material',
                         id: 'rawMaterial',
                         type: 'select',
-                        options: {}
+                        options: {},
+                        dataFrom: 'purchase.rmMaster',
+                        optionFieldName: 'rmName'
                     }, {
                         name: 'Input weight',
                         id: 'inputWeight',
@@ -184,7 +186,9 @@ erpApp.constant('erpAppConfig', {
                         name: 'UOM',
                         id: 'uom',
                         type: 'select',
-                        options: {}
+                        options: {},
+                        dataFrom: 'marketing.uomMaster',
+                        optionFieldName: 'uomName'
                     }, {
                         name: 'Prod Rate/ hr',
                         id: 'prodRateHr',
@@ -244,17 +248,17 @@ erpApp.constant('erpAppConfig', {
             },
             customerMaster: {
                 title: 'Customer Master',
-                data: {
-                    customerCode: '',
-                    customerName: '',
-                    address: '',
-                    contactNo: '',
-                    gstin: '',
+                masterData: {
+                    customerCode: null,
+                    customerName: null,
+                    address: null,
+                    contactNo: null,
+                    gstin: null,
                     mapping: [{
                         id: null,
-                        partName: '',
-                        rate: '',
-                        gst: ''
+                        partName: null,
+                        rate: null,
+                        gst: null
                     }]
                 },
                 form: {
@@ -264,7 +268,8 @@ erpApp.constant('erpAppConfig', {
                     fields: [{
                         name: 'Customer Code',
                         id: 'customerCode',
-                        type: 'span'
+                        type: 'span',
+                        valuePrefix: 'VT-'
                     }, {
                         name: 'Customer Name',
                         id: 'customerName',
@@ -297,7 +302,9 @@ erpApp.constant('erpAppConfig', {
                                 id: 'id',
                                 type: 'select',
                                 options: {},
-                                action: 'changeMapping'
+                                action: 'changeMapping',
+                                dataFrom: 'marketing.partMaster',
+                                optionFieldName: 'partNo'
                             },
                             {
                                 name: 'Part Name',
@@ -319,7 +326,8 @@ erpApp.constant('erpAppConfig', {
                 },
                 listView: [{
                         title: 'Customer Code',
-                        value: 'customerCode'
+                        value: 'customerCode',
+                        valuePrefix: 'VT-'
                     },
                     {
                         title: 'Customer Name',
@@ -344,20 +352,20 @@ erpApp.constant('erpAppConfig', {
             },
             empMaster: {
                 title: 'Employee Master',
-                data: {
-                    id: '',
-                    employeeCode: '',
-                    employeeName: '',
-                    address: '',
-                    contactNo: '',
-                    mailId: '',
-                    qualification: '',
-                    designation: '',
-                    basicSalary: '',
-                    hra: '',
-                    ca: '',
-                    ot: '',
-                    totalSalary: ''
+                masterData: {
+                    id: null,
+                    employeeCode: null,
+                    employeeName: null,
+                    address: null,
+                    contactNo: null,
+                    mailId: null,
+                    qualification: null,
+                    designation: null,
+                    basicSalary: null,
+                    hra: null,
+                    ca: null,
+                    ot: null,
+                    totalSalary: null
                 },
                 form: {
                     name: 'empMaster',
@@ -463,19 +471,19 @@ erpApp.constant('erpAppConfig', {
             },
             uomMaster: {
                 title: 'UOM Master',
-                data: {
-                    uomCode: '',
-                    uomName: ''
+                masterData: {
+                    uomCode: null,
+                    uomName: null
                 },
                 form: {
                     name: 'uomMaster',
                     id: 'uomMaster',
+                    autoGenKey: 'uomCode',
                     fields: [{
                         name: 'UOM Code',
                         id: 'uomCode',
-                        type: 'input',
-                        inputType: 'text',
-                        required: true
+                        type: 'span',
+                        valuePrefix: 'VT-'
                     }, {
                         name: 'UOM Name',
                         id: 'uomName',
@@ -486,7 +494,8 @@ erpApp.constant('erpAppConfig', {
                 },
                 listView: [{
                         title: 'UOM Code',
-                        value: 'uomCode'
+                        value: 'uomCode',
+                        valuePrefix: 'VT-'
                     },
                     {
                         title: 'UOM Name',
@@ -511,24 +520,24 @@ erpApp.constant('erpAppConfig', {
             },
             invoice: {
                 title: 'Invoice',
-                data: {
-                    invoiceNo: '',
-                    date: '',
-                    customerCode: '',
-                    partyGstin: '',
-                    partyArnNo: '',
-                    taxRate: '',
-                    cgst: '',
-                    sgst: '',
-                    total: '',
+                masterData: {
+                    invoiceNo: null,
+                    date: null,
+                    customerCode: null,
+                    partyGstin: null,
+                    partyArnNo: null,
+                    taxRate: null,
+                    cgst: null,
+                    sgst: null,
+                    total: null,
                     mapping: [{
-                        id: '',
-                        sNo: '',
-                        partNo: '',
-                        partName: '',
-                        unit: '',
-                        rate: '',
-                        amount: ''
+                        id: null,
+                        sNo: null,
+                        partNo: null,
+                        partName: null,
+                        unit: null,
+                        rate: null,
+                        amount: null
                     }]
                 },
                 form: {
@@ -556,7 +565,9 @@ erpApp.constant('erpAppConfig', {
                             name: 'To',
                             id: 'customerCode',
                             type: 'select',
-                            options: {}
+                            options: {},
+                            dataFrom: 'marketing.customerMaster',
+                            optionFieldName: 'customerName'
                         },
                         'partyGstin': {
                             name: 'Party GSTIN',
@@ -628,7 +639,9 @@ erpApp.constant('erpAppConfig', {
                                 id: 'id',
                                 type: 'select',
                                 options: {},
-                                action: 'changeMapping'
+                                action: 'changeMapping',
+                                dataFrom: 'marketing.partMaster',
+                                optionFieldName: 'partNo'
                             },
                             {
                                 name: 'Part Name',
@@ -691,17 +704,17 @@ erpApp.constant('erpAppConfig', {
             icon: 'money',
             rmMaster: {
                 title: 'Raw Material Master',
-                data: {
-                    rmCode: '',
-                    rmName: '',
-                    grade: '',
-                    type: '',
-                    hsnCode: '',
-                    uom: '',
-                    rate: '',
-                    gst: '',
-                    sgst: '',
-                    cgst: ''
+                masterData: {
+                    rmCode: null,
+                    rmName: null,
+                    grade: null,
+                    type: null,
+                    hsnCode: null,
+                    uom: null,
+                    rate: null,
+                    gst: null,
+                    sgst: null,
+                    cgst: null
                 },
                 form: {
                     name: 'rmMaster',
@@ -740,7 +753,9 @@ erpApp.constant('erpAppConfig', {
                         name: 'UOM',
                         id: 'uom',
                         type: 'select',
-                        options: {}
+                        options: {},
+                        dataFrom: 'marketing.uomMaster',
+                        optionFieldName: 'uomName'
                     }, {
                         name: 'Rate',
                         id: 'rate',
@@ -795,18 +810,17 @@ erpApp.constant('erpAppConfig', {
             },
             supplierMaster: {
                 title: 'Supplier Master',
-                data: {
-                    supplierCode: '',
-                    supplierName: '',
-                    address: '',
-                    contactNo: '',
-                    gstin: '',
+                masterData: {
+                    supplierCode: null,
+                    supplierName: null,
+                    address: null,
+                    contactNo: null,
+                    gstin: null,
                     mapping: [{
-                        id: '',
-                        rmCode: '',
-                        rmName: '',
-                        rate: '',
-                        gst: ''
+                        id: null,
+                        rmCode: null,
+                        rate: null,
+                        gst: null
                     }]
                 },
                 form: {
@@ -846,16 +860,13 @@ erpApp.constant('erpAppConfig', {
                     mapping: {
                         name: 'RM Mapping',
                         fields: [{
-                                name: 'RM Code',
+                                name: 'RM Name',
                                 id: 'id',
                                 type: 'select',
                                 options: {},
-                                action: 'changeMapping'
-                            },
-                            {
-                                name: 'Rm Name',
-                                id: 'rmName',
-                                type: 'span'
+                                action: 'changeMapping',
+                                dataFrom: 'purchase.rmMaster',
+                                optionFieldName: 'rmName'
                             },
                             {
                                 name: 'Rate',
@@ -902,21 +913,20 @@ erpApp.constant('erpAppConfig', {
             },
             poSupplier: {
                 title: 'Purchase Order - Supplier',
-                data: {
-                    poNo: '',
-                    date: '',
-                    supplierCode: '',
-                    gstin: '',
+                masterData: {
+                    poNo: null,
+                    date: null,
+                    supplierCode: null,
+                    gstin: null,
                     mapping: [{
                         id: null,
-                        rmName: '',
-                        qty: '',
-                        uom: '',
-                        rate: '',
-                        gst: '',
-                        cgst: '',
-                        sgst: '',
-                        total: ''
+                        qty: null,
+                        uom: null,
+                        rate: null,
+                        gst: null,
+                        cgst: null,
+                        sgst: null,
+                        total: null
                     }]
                 },
                 form: {
@@ -939,7 +949,11 @@ erpApp.constant('erpAppConfig', {
                         id: 'supplierCode',
                         type: 'select',
                         options: {},
-                        action: 'changeMapping'
+                        action: 'changeMapping',
+                        updateMapping: true,
+                        updateData: ['gstin', 'mapping'],
+                        dataFrom: 'purchase.supplierMaster',
+                        optionFieldName: 'supplierName'
                     }, {
                         name: 'Party Gstin',
                         id: 'gstin',
@@ -948,16 +962,13 @@ erpApp.constant('erpAppConfig', {
                     mapping: {
                         name: 'RM Mapping',
                         fields: [{
-                                name: 'RM Code',
+                                name: 'RM Name',
                                 id: 'id',
                                 type: 'select',
                                 options: {},
-                                action: 'changeMapping'
-                            },
-                            {
-                                name: 'RM Name',
-                                id: 'rmName',
-                                type: 'span'
+                                action: 'changeMapping',
+                                dataFrom: 'purchase.rmMaster',
+                                optionFieldName: 'rmName'
                             },
                             {
                                 name: 'Qty',
@@ -1011,7 +1022,9 @@ erpApp.constant('erpAppConfig', {
                         valuePrefix: 'VT-SP-'
                     },
                     {
-                        action: true
+                        action: true,
+                        printView: true,
+                        edit: false
                     }
                 ],
                 page: {
@@ -1029,18 +1042,17 @@ erpApp.constant('erpAppConfig', {
             },
             subContractorMaster: {
                 title: 'Sub Contractor Master',
-                data: {
-                    subContractorCode: '',
-                    subContractorName: '',
-                    address: '',
-                    contactNo: '',
-                    gstin: '',
+                masterData: {
+                    subContractorCode: null,
+                    subContractorName: null,
+                    address: null,
+                    contactNo: null,
+                    gstin: null,
                     mapping: [{
                         id: null,
-                        partName: '',
-                        oppCode: '',
-                        rate: '',
-                        gst: ''
+                        opCode: null,
+                        rate: null,
+                        gst: null
                     }]
                 },
                 form: {
@@ -1080,21 +1092,20 @@ erpApp.constant('erpAppConfig', {
                     mapping: {
                         name: 'Part Mapping',
                         fields: [{
-                                name: 'Part No',
+                                name: 'Part Name',
                                 id: 'id',
                                 type: 'select',
                                 options: {},
-                                action: 'changeMapping'
-                            },
-                            {
-                                name: 'Part Name',
-                                id: 'partName',
-                                type: 'span'
+                                action: 'changeMapping',
+                                dataFrom: 'marketing.partMaster',
+                                optionFieldName: 'partNo'
                             }, {
-                                name: 'Opp Name',
-                                id: 'oppCode',
+                                name: 'Op Name',
+                                id: 'opCode',
                                 type: 'select',
-                                options: {}
+                                options: {},
+                                dataFrom: 'production.operationMaster',
+                                optionFieldName: 'opName'
                             },
                             {
                                 name: 'Rate',
@@ -1137,22 +1148,21 @@ erpApp.constant('erpAppConfig', {
             },
             poSubContractor: {
                 title: 'Purchase Order - Sub Contractor',
-                data: {
-                    poNo: '',
-                    date: '',
-                    subContractorCode: '',
-                    gstin: '',
+                masterData: {
+                    poNo: null,
+                    date: null,
+                    subContractorCode: null,
+                    gstin: null,
                     mapping: [{
                         id: null,
-                        partName: '',
-                        oppCode: '',
-                        qty: '',
-                        uom: '',
-                        rate: '',
-                        gst: '',
-                        cgst: '',
-                        sgst: '',
-                        total: ''
+                        opCode: null,
+                        qty: null,
+                        uom: null,
+                        rate: null,
+                        gst: null,
+                        cgst: null,
+                        sgst: null,
+                        total: null
                     }]
                 },
                 form: {
@@ -1175,7 +1185,11 @@ erpApp.constant('erpAppConfig', {
                         id: 'subContractorCode',
                         type: 'select',
                         options: {},
-                        action: 'changeMapping'
+                        action: 'changeMapping',
+                        updateMapping: true,
+                        updateData: ['gstin', 'mapping'],
+                        dataFrom: 'purchase.subContractorMaster',
+                        optionFieldName: 'subContractorName'
                     }, {
                         name: 'Party Gstin',
                         id: 'gstin',
@@ -1188,24 +1202,23 @@ erpApp.constant('erpAppConfig', {
                                 id: 'id',
                                 type: 'select',
                                 options: {},
-                                action: 'changeMapping'
-                            },
-                            {
-                                name: 'Part Name',
-                                id: 'partName',
-                                type: 'span'
+                                action: 'changeMapping',
+                                dataFrom: 'marketing.partMaster',
+                                optionFieldName: 'partNo'
                             }, {
-                                name: 'Opp Name',
-                                id: 'oppCode',
+                                name: 'Op Name',
+                                id: 'opCode',
                                 type: 'select',
-                                options: {}
+                                options: {},
+                                dataFrom: 'production.operationMaster',
+                                optionFieldName: 'opName'
                             },
                             {
                                 name: 'Qty',
                                 id: 'qty',
                                 type: 'input',
                                 inputType: 'text',
-                                action: 'updateRmTotal',
+                                action: 'updatePartTotal',
                                 required: true
                             },
                             {
@@ -1252,7 +1265,9 @@ erpApp.constant('erpAppConfig', {
                         valuePrefix: 'VT-SC-'
                     },
                     {
-                        action: true
+                        action: true,
+                        printView: true,
+                        edit: false
                     }
                 ],
                 page: {
@@ -1273,117 +1288,25 @@ erpApp.constant('erpAppConfig', {
             name: 'Store',
             title: 'Store',
             icon: 'suitcase',
-            dcSupplier: {
-                title: 'Delivery Chellan - Supplier',
-                data: {
-                    dcNo: '',
-                    date: '',
-                    supplierCode: '',
-                    mapping: [{
-                        id: null,
-                        rmCode: '',
-                        rmName: '',
-                        poQty: '',
-                        total: ''
-                    }]
-                },
-                form: {
-                    name: 'dcSupplier',
-                    id: 'dcSupplier',
-                    autoGenKey: 'dcNo',
-                    fields: [{
-                        name: 'DC No',
-                        id: 'dcNo',
-                        type: 'span'
-                    }, {
-                        name: 'Date',
-                        id: 'date',
-                        type: 'input',
-                        inputType: 'date',
-                        required: true
-                    }, {
-                        name: 'Supplier Code',
-                        id: 'supplierCode',
-                        type: 'select',
-                        options: {}
-                    }],
-                    mapping: {
-                        name: 'Detail Mapping',
-                        fields: [{
-                                name: 'PO No',
-                                id: 'id',
-                                type: 'select',
-                                options: {},
-                                action: 'changeMapping'
-                            },
-                            {
-                                name: 'RM Code',
-                                id: 'rmCode',
-                                type: 'span'
-                            },
-                            {
-                                name: 'RM Name',
-                                id: 'rmName',
-                                type: 'span'
-                            },
-                            {
-                                name: 'PO Qty',
-                                id: 'poQty',
-                                type: 'span'
-                            },
-                            {
-                                name: 'total',
-                                id: 'total',
-                                type: 'span'
-                            }
-                        ]
-                    }
-                },
-                listView: [{
-                        title: 'DC NO',
-                        value: 'dcNo'
-                    },
-                    {
-                        title: 'Supplier Code',
-                        value: 'supplierCode'
-                    },
-                    {
-                        action: true
-                    }
-                ],
-                page: {
-                    link: 'store/dcSupplier/list',
-                    name: 'list',
-                    templateUrl: 'template/defaultController.html',
-                    controller: 'dcSupplierCtrl'
-                },
-                services: {
-                    list: {
-                        url: 'api/dcSupplier/data',
-                        method: 'GET'
-                    }
-                }
-            },
             grnSupplier: {
                 title: 'Good Receipt Note - Supplier',
-                data: {
-                    grnNo: '',
-                    date: '',
-                    supplierCode: '',
-                    supplierDCNo: '',
-                    supplierDCDate: '',
+                masterData: {
+                    grnNo: null,
+                    date: null,
+                    supplierCode: null,
+                    poNo: null,
+                    supplierDCCode: null,
+                    supplierDCDate: null,
                     mapping: [{
                         id: null,
-                        rmCode: '',
-                        rmName: '',
-                        poQty: '',
-                        uom: '',
-                        receivedQty: '',
-                        acceptedQty: '',
-                        rate: '',
-                        gst: '',
-                        cost: '',
-                        total: ''
+                        qty: null,
+                        uom: null,
+                        receivedQty: null,
+                        acceptedQty: null,
+                        rate: null,
+                        gst: null,
+                        cost: null,
+                        total: null
                     }]
                 },
                 form: {
@@ -1391,55 +1314,64 @@ erpApp.constant('erpAppConfig', {
                     id: 'grnSupplier',
                     autoGenKey: 'grnNo',
                     fields: [{
-                        name: 'GRN No',
-                        id: 'grnNo',
-                        type: 'span'
-                    }, {
-                        name: 'Date',
-                        id: 'date',
-                        type: 'input',
-                        inputType: 'date',
-                        required: true
-                    }, {
-                        name: 'Supplier Code',
-                        id: 'supplierCode',
-                        type: 'select',
-                        options: {}
-                    }, {
-                        name: 'Supplier DC Code',
-                        id: 'supplierDCCode',
-                        type: 'input',
-                        inputType: 'text',
-                        required: true
-                    }, {
-                        name: 'Supplier DC Date',
-                        id: 'supplierDCDate',
-                        type: 'input',
-                        inputType: 'date',
-                        required: true
-                    }],
+                            name: 'GRN No',
+                            id: 'grnNo',
+                            type: 'span',
+                            valuePrefix: 'VT-GRN-'
+                        }, {
+                            name: 'Date',
+                            id: 'date',
+                            type: 'input',
+                            inputType: 'date',
+                            required: true
+                        }, {
+                            name: 'Supplier Code',
+                            id: 'supplierCode',
+                            type: 'select',
+                            options: {},
+                            action: 'getPOSupplier',
+                            dataFrom: 'purchase.supplierMaster',
+                            optionFieldName: 'supplierName'
+                        },
+                        {
+                            name: 'PO No',
+                            id: 'poNo',
+                            type: 'select',
+                            options: {},
+                            action: 'changeMapping',
+                            updateMapping: true,
+                            updateData: ['mapping'],
+                            dataFrom: 'purchase.poSupplier',
+                            optionFieldName: 'poNo'
+                        },
+                        {
+                            name: 'Supplier DC Code',
+                            id: 'supplierDCCode',
+                            type: 'input',
+                            inputType: 'text',
+                            required: true
+                        }, {
+                            name: 'Supplier DC Date',
+                            id: 'supplierDCDate',
+                            type: 'input',
+                            inputType: 'date',
+                            required: true
+                        }
+                    ],
                     mapping: {
                         name: 'Detail Mapping',
                         fields: [{
-                                name: 'PO No',
+                                name: 'RM Name',
                                 id: 'id',
                                 type: 'select',
                                 options: {},
-                                action: 'changeMapping'
-                            },
-                            {
-                                name: 'RM Code',
-                                id: 'rmCode',
-                                type: 'span'
-                            },
-                            {
-                                name: 'RM Name',
-                                id: 'rmName',
-                                type: 'span'
+                                action: 'changeMapping',
+                                dataFrom: 'purchase.rmMaster',
+                                optionFieldName: 'rmName'
                             },
                             {
                                 name: 'PO Qty',
-                                id: 'poQty',
+                                id: 'qty',
                                 type: 'span'
                             },
                             {
@@ -1450,12 +1382,16 @@ erpApp.constant('erpAppConfig', {
                             {
                                 name: 'Received Qty',
                                 id: 'receivedQty',
-                                type: 'span'
+                                type: 'input',
+                                inputType: 'text',
+                                required: true
                             },
                             {
                                 name: 'Accepted Qty',
                                 id: 'acceptedQty',
-                                type: 'span'
+                                type: 'input',
+                                inputType: 'text',
+                                required: true
                             },
                             {
                                 name: 'Rate',
@@ -1468,11 +1404,6 @@ erpApp.constant('erpAppConfig', {
                                 type: 'span'
                             },
                             {
-                                name: 'Cost',
-                                id: 'cost',
-                                type: 'span'
-                            },
-                            {
                                 name: 'total',
                                 id: 'total',
                                 type: 'span'
@@ -1482,14 +1413,17 @@ erpApp.constant('erpAppConfig', {
                 },
                 listView: [{
                         title: 'GRN NO',
-                        value: 'grnNo'
+                        value: 'grnNo',
+                        valuePrefix: 'VT-GRN-'
                     },
                     {
                         title: 'Supplier DC Code',
                         value: 'supplierDCCode'
                     },
                     {
-                        action: true
+                        action: true,
+                        printView: true,
+                        edit: false
                     }
                 ],
                 page: {
@@ -1507,18 +1441,18 @@ erpApp.constant('erpAppConfig', {
             },
             dcSubContractor: {
                 title: 'Delivery Chellan - Sub Contractor',
-                data: {
-                    dcNo: '',
-                    date: '',
-                    subContractorCode: '',
+                masterData: {
+                    dcNo: null,
+                    date: null,
+                    subContractorCode: null,
+                    poNo: null,
                     mapping: [{
                         id: null,
-                        partNo: '',
-                        partFrom: '',
-                        forPurpose: '',
-                        qty: '',
-                        uom: '',
-                        appCost: ''
+                        partFrom: null,
+                        forPurpose: null,
+                        qty: null,
+                        uom: null,
+                        appCost: null
                     }]
                 },
                 form: {
@@ -1539,7 +1473,9 @@ erpApp.constant('erpAppConfig', {
                         name: 'Sub Contractor Code',
                         id: 'subContractorCode',
                         type: 'select',
-                        options: {}
+                        options: {},
+                        dataFrom: 'purchase.SubContractor',
+                        optionFieldName: 'subContractorName'
                     }],
                     mapping: {
                         name: 'Detail Mapping',
@@ -1548,7 +1484,9 @@ erpApp.constant('erpAppConfig', {
                                 id: 'id',
                                 type: 'select',
                                 options: {},
-                                action: 'changeMapping'
+                                action: 'changeMapping',
+                        dataFrom: 'purchase.poSupplier',
+                        optionFieldName: 'poNo'
                             },
                             {
                                 name: 'Part No',
@@ -1610,26 +1548,26 @@ erpApp.constant('erpAppConfig', {
             },
             grnSubContractor: {
                 title: 'Good Receipt Note - Sub Contractor',
-                data: {
-                    grnNo: '',
-                    date: '',
-                    subContractorCode: '',
-                    subContractorDCNo: '',
-                    subContractorDCDate: '',
+                masterData: {
+                    grnNo: null,
+                    date: null,
+                    subContractorCode: null,
+                    poNo: null,
+                    subContractorDCNo: null,
+                    subContractorDCDate: null,
                     mapping: [{
                         id: null,
-                        partNo: '',
-                        partName: '',
-                        partFrom: '',
-                        ourDCNo: '',
-                        dcQty: '',
-                        uom: '',
-                        receivedQty: '',
-                        acceptedQty: '',
-                        rate: '',
-                        gst: '',
-                        cost: '',
-                        total: ''
+                        partNo: null,
+                        partFrom: null,
+                        ourDCNo: null,
+                        dcQty: null,
+                        uom: null,
+                        receivedQty: null,
+                        acceptedQty: null,
+                        rate: null,
+                        gst: null,
+                        cost: null,
+                        total: null
                     }]
                 },
                 form: {
@@ -1650,7 +1588,9 @@ erpApp.constant('erpAppConfig', {
                         name: 'Sub Contractor Code',
                         id: 'subContractorCode',
                         type: 'select',
-                        options: {}
+                        options: {},
+                        dataFrom: 'purchase.SubContractor',
+                        optionFieldName: 'subContractorName'
                     }, {
                         name: 'Sub Contractor DC Code',
                         id: 'subContractorDCCode',
@@ -1671,7 +1611,9 @@ erpApp.constant('erpAppConfig', {
                                 id: 'id',
                                 type: 'select',
                                 options: {},
-                                action: 'changeMapping'
+                                action: 'changeMapping',
+                        dataFrom: 'purchase.poSupplier',
+                        optionFieldName: 'poNo'
                             },
                             {
                                 name: 'Part No',
@@ -1774,17 +1716,17 @@ erpApp.constant('erpAppConfig', {
             icon: 'cogs',
             operationMaster: {
                 title: 'Operation Master',
-                data: {
-                    opNo: '',
-                    opName: '',
-                    source: ''
+                masterData: {
+                    opCode: null,
+                    opName: null,
+                    source: null
                 },
                 form: {
                     name: 'operationMaster',
                     id: 'operationMaster',
                     fields: [{
                         name: 'Operation',
-                        id: 'opNo',
+                        id: 'opCode',
                         type: 'input',
                         inputType: 'text',
                         required: true
@@ -1804,7 +1746,7 @@ erpApp.constant('erpAppConfig', {
                 },
                 listView: [{
                         title: 'Operation',
-                        value: 'opNo'
+                        value: 'opCode'
                     },
                     {
                         title: 'Operation Name',
@@ -1829,10 +1771,10 @@ erpApp.constant('erpAppConfig', {
             },
             bom: {
                 title: 'BOM',
-                data: {
-                    partNo: '',
-                    rmCode: '',
-                    partNorms: ''
+                masterData: {
+                    partNo: null,
+                    rmCode: null,
+                    partNorms: null
                 },
                 form: {
                     name: 'bom',
@@ -1841,12 +1783,16 @@ erpApp.constant('erpAppConfig', {
                         name: 'Part No',
                         id: 'partNo',
                         type: 'select',
-                        options: {}
+                        options: {},
+                        dataFrom: 'marketing.partMaster',
+                        optionFieldName: 'partNo'
                     }, {
                         name: 'RM Code',
                         id: 'rmCode',
                         type: 'select',
-                        options: {}
+                        options: {},
+                        dataFrom: 'purchase.rmMaster',
+                        optionFieldName: 'rmName'
                     }, {
                         name: 'Part Norms',
                         id: 'partNorms',
@@ -1883,14 +1829,14 @@ erpApp.constant('erpAppConfig', {
             },
             machineMaster: {
                 title: 'Machine Master',
-                data: {
-                    machineNo: '',
-                    machineName: '',
-                    make: '',
-                    model: '',
-                    capacity: '',
-                    yoe: '',
-                    value: ''
+                masterData: {
+                    machineNo: null,
+                    machineName: null,
+                    make: null,
+                    model: null,
+                    capacity: null,
+                    yoe: null,
+                    value: null
                 },
                 form: {
                     name: 'machineMaster',
@@ -1967,12 +1913,12 @@ erpApp.constant('erpAppConfig', {
             },
             flowMaster: {
                 title: 'Flow Master',
-                data: {
-                    partNo: '',
+                masterData: {
+                    partNo: null,
                     mapping: [{
                         id: null,
-                        opName: '',
-                        source: ''
+                        opName: null,
+                        source: null
                     }]
                 },
                 form: {
@@ -1983,19 +1929,23 @@ erpApp.constant('erpAppConfig', {
                         id: 'partNo',
                         type: 'select',
                         options: {},
-                        required: true
+                        required: true,
+                        dataFrom: 'marketing.partMaster',
+                        optionFieldName: 'partNo'
                     }],
                     mapping: {
                         name: 'OP Mapping',
                         fields: [{
-                                name: 'Part Opp cpde',
+                                name: 'Part op code',
                                 id: 'id',
                                 type: 'select',
                                 options: {},
-                                action: 'changeMapping'
+                                action: 'changeMapping',
+                                dataFrom: 'production.operationMaster',
+                                optionFieldName: 'opCode'
                             },
                             {
-                                name: 'Opp Name',
+                                name: 'op Name',
                                 id: 'opName',
                                 type: 'span'
                             },
@@ -2030,14 +1980,14 @@ erpApp.constant('erpAppConfig', {
             },
             toolMaster: {
                 title: 'Tool Master',
-                data: {
-                    toolNo: '',
-                    partName: '',
-                    make: '',
-                    type: '',
-                    toolLife: '',
-                    yop: '',
-                    value: ''
+                masterData: {
+                    toolNo: null,
+                    partName: null,
+                    make: null,
+                    type: null,
+                    toolLife: null,
+                    yop: null,
+                    value: null
                 },
                 form: {
                     name: 'toolMaster',
@@ -2114,15 +2064,15 @@ erpApp.constant('erpAppConfig', {
             },
             materialIssueNote: {
                 title: 'Material Issue Note',
-                data: {
-                    jobCardNo: '',
-                    date: '',
-                    rmCode: '',
-                    partNo: '',
-                    norms: '',
-                    issueQty: '',
-                    qtyCanMake: '',
-                    issueStage: ''
+                masterData: {
+                    jobCardNo: null,
+                    date: null,
+                    rmCode: null,
+                    partNo: null,
+                    norms: null,
+                    issueQty: null,
+                    qtyCanMake: null,
+                    issueStage: null
                 },
                 form: {
                     name: 'materialIssueNote',
@@ -2142,12 +2092,16 @@ erpApp.constant('erpAppConfig', {
                         name: 'RM Code',
                         id: 'rmCode',
                         type: 'select',
-                        options: {}
+                        options: {},
+                        dataFrom: 'purchase.rmMaster',
+                        optionFieldName: 'rmName'
                     }, {
                         name: 'Part No',
                         id: 'partNo',
                         type: 'select',
-                        options: {}
+                        options: {},
+                        dataFrom: 'marketing.partMaster',
+                        optionFieldName: 'partNo'
                     }, {
                         name: 'Norms',
                         id: 'norms',
@@ -2201,21 +2155,21 @@ erpApp.constant('erpAppConfig', {
             },
             productionEntry: {
                 title: 'Production Entry',
-                data: {
-                    date: '',
-                    mcNo: '',
-                    jobCardNo: '',
-                    partNo: '',
-                    operationFrom: '',
-                    operationTo: '',
-                    toolNo: '',
-                    operator: '',
-                    startTime: '',
-                    endTime: '',
-                    planQty: '',
-                    acceptedQty: '',
-                    rejectionQty: '',
-                    rmQty: ''
+                masterData: {
+                    date: null,
+                    mcNo: null,
+                    jobCardNo: null,
+                    partNo: null,
+                    operationFrom: null,
+                    operationTo: null,
+                    toolNo: null,
+                    operator: null,
+                    startTime: null,
+                    endTime: null,
+                    planQty: null,
+                    acceptedQty: null,
+                    rejectionQty: null,
+                    rmQty: null
                 },
                 form: {
                     name: 'productionEntry',
@@ -2270,13 +2224,13 @@ erpApp.constant('erpAppConfig', {
                         type: 'select',
                         options: {},
                         required: true
-                    },{
+                    }, {
                         name: 'Start Time',
                         id: 'startTime',
                         type: 'input',
                         inputType: 'date',
                         required: true
-                    },{
+                    }, {
                         name: 'End Time',
                         id: 'endTime',
                         type: 'input',
@@ -2329,6 +2283,44 @@ erpApp.constant('erpAppConfig', {
                 services: {
                     list: {
                         url: 'api/productionEntry/data',
+                        method: 'GET'
+                    }
+                }
+            }
+        },
+        report: {
+            name: 'Report',
+            title: 'Report',
+            icon: 'tasks',
+            rmStock: {
+                title: 'Raw Material Stock',
+                masterData: {
+                    opCode: null,
+                    opName: null,
+                    source: null
+                },
+                form: {},
+                listView: [{
+                        title: 'Raw Material Name',
+                        value: 'id'
+                    },
+                    {
+                        title: 'Rm Stock Qty',
+                        value: 'rmStockQty'
+                    },
+                    {
+                        action: false
+                    }
+                ],
+                page: {
+                    link: 'report/rmStock/list',
+                    name: 'list',
+                    templateUrl: 'template/defaultController.html',
+                    controller: 'rmStockCtrl'
+                },
+                services: {
+                    list: {
+                        url: 'api/rmStock/data',
                         method: 'GET'
                     }
                 }
